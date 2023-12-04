@@ -8,11 +8,15 @@ function Input({
   handleChange,
   defaultValue,
   disabled,
+  id,
 }) {
   return (
     <section className="input">
-      <label className="input__label">{label}</label>
+      <label htmlFor={id} className="input__label">
+        {label}
+      </label>
       <input
+        id={id}
         type={type}
         className={`input__field ${customClass ? customClass : ""}`}
         name={name}
