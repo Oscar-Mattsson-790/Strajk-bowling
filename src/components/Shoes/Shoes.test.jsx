@@ -1,17 +1,35 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { expect } from "vitest";
 import Shoes from "./Shoes";
 
-describe("Shoes Component", () => {
-  it("allows a user to select shoe sizes for each player", async () => {
-    const mockShoes = [{ id: "shoe1", size: "" }];
-    render(
-      <Shoes
-        shoes={mockShoes}
-        updateSize={() => {}}
-        addShoe={() => {}}
-        removeShoe={() => {}}
-      />
-    );
-  });
+it("should allow user to select shoe size for each player", () => {
+  const mockUpdateSize = () => {};
+  const mockAddShoe = () => {};
+  const mockRemoveShoe = () => {};
+  const shoes = [{ id: "shoe1", size: "" }];
+
+  render(
+    <Shoes
+      updateSize={mockUpdateSize}
+      addShoe={mockAddShoe}
+      removeShoe={mockRemoveShoe}
+      shoes={shoes}
+    />
+  );
+
+  const addButton = screen.getByText("+");
+  fireEvent.click(addButton);
+
+  // Assertions can be added here if needed
+});
+
+it("should allow user to remove a shoe size field", () => {
+  const mockRemoveShoe = () => {};
+  const shoes = [{ id: "shoe1", size: "" }];
+
+  render(<Shoes removeShoe={mockRemoveShoe} shoes={shoes} />);
+
+  const removeButton = screen.getByText("-");
+  fireEvent.click(removeButton);
+
+  // Assertions can be added here if needed
 });
