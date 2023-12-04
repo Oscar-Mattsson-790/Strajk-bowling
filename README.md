@@ -23,13 +23,14 @@
 2. När användaren tar bort en skostorlek, ska det motsvarande fältet försvinna.
 3. Systemet ska uppdatera och visa den korrigerade listan av skostorlekar.
 
-
+------
 
 4) Som användare vill jag kunna skicka iväg min reservation och få tillbaka ett ett bokningsnummer och totalsumma så jag vet hur mycket jag ska betala. (120 kr / person + 100 kr / bana).
 1. Användaren ska kunna granska och bekräfta alla bokningsdetaljer innan sändning.
 2. Vid bekräftelse, ska användaren få ett unikt bokningsnummer och en totalsumma baserad på (120 kr per person + 100 kr per bana).
 3. Ett bekräftelsemeddelande med bokningsdetaljer ska visas efter att bokningen skickats iväg.
 
+------
 
 Som användare vill jag kunna navigera mellan boknings-och bekräftelsevyn.
 1. Användaren ska enkelt kunna navigera från bokningsvyn till bekräftelsevyn efter att ha skickat reservationen.
