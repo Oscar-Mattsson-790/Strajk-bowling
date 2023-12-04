@@ -32,7 +32,7 @@
 
 ------
 
-Som användare vill jag kunna navigera mellan boknings-och bekräftelsevyn.
+5) Som användare vill jag kunna navigera mellan boknings-och bekräftelsevyn.
 1. Användaren ska enkelt kunna navigera från bokningsvyn till bekräftelsevyn efter att ha skickat reservationen.
 2. Bekräftelsevyn ska tydligt visa alla relevant bokningsinformation.
 3. Användaren ska ha möjlighet att återgå till bokningsvyn eller avsluta processen från bekräftelsevyn.
