@@ -18,8 +18,6 @@ it("should allow user to select shoe size for each player", () => {
 
   const addButton = screen.getByText("+");
   fireEvent.click(addButton);
-
-  // Assertions can be added here if needed
 });
 
 it("should allow user to remove a shoe size field", () => {
@@ -30,6 +28,4 @@ it("should allow user to remove a shoe size field", () => {
 
   const removeButton = screen.getByText("-");
   fireEvent.click(removeButton);
-
-  // Assertions can be added here if needed
 });
