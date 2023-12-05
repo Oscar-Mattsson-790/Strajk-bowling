@@ -6,16 +6,13 @@ export const handlers = [
     async ({ request }) => {
       const body = await request.json();
 
-      // Calculate the total price based on your pricing logic
       const totalPrice = body.people * 120 + body.lanes * 100;
 
-      // Validate shoe sizes
       const shoeSizesAreValid = body.shoes.length === parseInt(body.people);
 
-      // Create the booking response object
       const booking = {
         active: true,
-        id: "STR9883PCKL", // Generate a unique ID as needed
+        id: "STR9883PCKL",
         price: totalPrice,
         lanes: body.lanes,
         people: body.people,
