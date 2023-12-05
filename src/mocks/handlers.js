@@ -10,11 +10,15 @@ export const handlers = [
 
       const totalPrice = newBooking.people * 120 + newBooking.lanes * 100;
 
+      const shoeSizesAreValid =
+        newBooking.shoes.length === parseInt(newBooking.people);
+
       const bookingResponse = {
         ...newBooking,
         id: "1234",
         confirmation: "Bokad",
         price: totalPrice,
+        shoeSizesValid: shoeSizesAreValid,
       };
 
       bookings.push(bookingResponse);
