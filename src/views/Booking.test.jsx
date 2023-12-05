@@ -23,10 +23,10 @@ describe("Booking process", () => {
 
     fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
-    // await waitFor(() => {
-    //   const confirmationMessage = screen.getByText(/bokning bekräftad/i);
-    //   expect(confirmationMessage).toBeInTheDocument();
-    // });
+    await waitFor(() => {
+      const confirmationMessage = screen.getByText(/strIIIIIike!/i);
+      expect(confirmationMessage).toBeInTheDocument();
+    });
   });
 });
 
