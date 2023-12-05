@@ -4,13 +4,12 @@ import { MemoryRouter } from "react-router-dom";
 import Booking from "./Booking";
 import { expect, vi } from "vitest";
 
-// Mock fetch-anropet
 global.fetch = vi.fn(() =>
   Promise.resolve({
     json: () =>
       Promise.resolve({
         id: "STR9883PCKL",
-        price: 880, // Anta att det är summan baserat på din prislogik
+        price: 880,
       }),
   })
 );
@@ -31,13 +30,11 @@ describe("Booking Submission and Confirmation Process", () => {
     );
     await userEvent.type(screen.getByLabelText(/number of lanes/i), "2");
 
-    // Lägg till skostorlekar för varje person
     for (let i = 0; i < 4; i++) {
       await userEvent.click(screen.getByText(/\+/i));
-      await userEvent.type(screen.getAllByRole("textbox")[i], "42"); // Ange skostorlek för varje person
+      await userEvent.type(screen.getAllByRole("textbox")[i], "42"); // Ange
     }
 
-    // Klicka på bokningsknappen
     await userEvent.click(screen.getByText(/strIIIIIike!/i));
 
     // Bekräftelselogik här
