@@ -68,6 +68,4 @@ describe("Shoes", () => {
     expect(removeShoe).toHaveBeenCalledWith("1");
     expect(shoes).toHaveLength(0);
   });
-
-  // Lägg till fler tester här för att hantera unik skostorlek och bekräftelse av vald storlek
 });
