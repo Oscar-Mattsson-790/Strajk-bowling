@@ -2,16 +2,34 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Booking from "./Booking";
 
-describe("Booking submission", () => {
-  it("allows the user to review and confirm booking details before submission", () => {
+describe("Booking Submission and Confirmation Process", () => {
+  it("allows the user to review and confirm all booking details before submission", async () => {
     render(
       <MemoryRouter>
         <Booking />
       </MemoryRouter>
     );
 
-    const confirmButton = screen.getByText(/strIIIIIike!/i);
-    fireEvent.click(confirmButton);
+    fireEvent.change(screen.getByLabelText(/date/i), {
+      target: { value: "2023-12-05" },
+    });
+    fireEvent.change(screen.getByLabelText(/time/i), {
+      target: { value: "15:00" },
+    });
+    fireEvent.change(screen.getByLabelText(/number of awesome bowlers/i), {
+      target: { value: "4" },
+    });
+    fireEvent.change(screen.getByLabelText(/number of lanes/i), {
+      target: { value: "2" },
+    });
+
+    // Click the submit button
+    fireEvent.click(screen.getByText(/strIIIIIike!/i));
+
+    expect(screen.getByDisplayValue("2023-12-05")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("15:00")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("4")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("2")).toBeInTheDocument();
   });
 
   it("returns a unique booking number and total price upon confirmation", async () => {
@@ -21,32 +39,30 @@ describe("Booking submission", () => {
       </MemoryRouter>
     );
 
-    const confirmButton = screen.getByText(/strIIIIIike!/i);
-    fireEvent.click(confirmButton);
+    fireEvent.change(screen.getByLabelText(/date/i), {
+      target: { value: "2023-12-05" },
+    });
+    fireEvent.change(screen.getByLabelText(/time/i), {
+      target: { value: "15:00" },
+    });
+    fireEvent.change(screen.getByLabelText(/number of awesome bowlers/i), {
+      target: { value: "4" },
+    });
+    fireEvent.change(screen.getByLabelText(/number of lanes/i), {
+      target: { value: "2" },
+    });
+    fireEvent.click(screen.getByText(/\+/i));
 
-    // Vänta på att bekräftelsemeddelandet visas och kontrollera informationen
-
-    // await waitFor(() => {
-    //   expect(screen.getByText(/Bokningsnummer:/i)).toBeInTheDocument();
-    //   expect(screen.getByText(/Totalt:/i)).toBeInTheDocument();
+    // fireEvent.change(screen.getByTestId(/Shoe size \/ person 1/i), {
+    //   target: { value: "42" },
     // });
-  });
 
-  it("displays a confirmation message with booking details after submission", async () => {
-    render(
-      <MemoryRouter>
-        <Booking />
-      </MemoryRouter>
-    );
-
-    const confirmButton = screen.getByText(/strIIIIIike!/i);
-    fireEvent.click(confirmButton);
-
-    // Vänta på att bekräftelsemeddelandet visas och kontrollera informationen
+    fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
     // await waitFor(() => {
-    //   expect(screen.getByText(/Bokningsnummer:/i)).toBeInTheDocument();
-    //   expect(screen.getByText(/Totalt:/i)).toBeInTheDocument();
+    //   expect(screen.getAllByLabelText(/Booking number:/i)).toBeInTheDocument();
+    //   const totalPrice = 4 * 120 + 2 * 100;
+    //   expect(screen.getByText(`Total: ${totalPrice} kr`)).toBeInTheDocument();
     // });
   });
 });
