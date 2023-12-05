@@ -53,16 +53,16 @@ describe("Booking Submission and Confirmation Process", () => {
     });
     fireEvent.click(screen.getByText(/\+/i));
 
-    // fireEvent.change(screen.getByTestId(/Shoe size \/ person 1/i), {
-    //   target: { value: "42" },
-    // });
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "42" },
+    });
 
     fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
-    // await waitFor(() => {
-    //   expect(screen.getAllByLabelText(/Booking number:/i)).toBeInTheDocument();
-    //   const totalPrice = 4 * 120 + 2 * 100;
-    //   expect(screen.getByText(`Total: ${totalPrice} kr`)).toBeInTheDocument();
-    // });
+    await waitFor(() => {
+      expect(screen.getAllByLabelText(/Booking number:/i)).toBeInTheDocument();
+      const totalPrice = 4 * 120 + 2 * 100;
+      expect(screen.getByText(`Total: ${totalPrice} kr`)).toBeInTheDocument();
+    });
   });
 });
