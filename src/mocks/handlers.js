@@ -1,29 +1,29 @@
 import { http, HttpResponse } from "msw";
 
-let bookings = [];
-
 export const handlers = [
   http.post(
     "https://h5jbtjv6if.execute-api.eu-north-1.amazonaws.com",
     async ({ request }) => {
-      const newBooking = await request.json();
+      const body = await request.json();
 
-      const totalPrice = newBooking.people * 120 + newBooking.lanes * 100;
+      // Calculate the total price based on your pricing logic
+      const totalPrice = body.people * 120 + body.lanes * 100;
 
-      const shoeSizesAreValid =
-        newBooking.shoes.length === parseInt(newBooking.people);
+      // Validate shoe sizes
+      const shoeSizesAreValid = body.shoes.length === parseInt(body.people);
 
-      const bookingResponse = {
-        ...newBooking,
-        id: "1234",
-        confirmation: "Bokad",
+      // Create the booking response object
+      const booking = {
+        active: true,
+        id: "STR9883PCKL", // Generate a unique ID as needed
         price: totalPrice,
-        shoeSizesValid: shoeSizesAreValid,
+        lanes: body.lanes,
+        people: body.people,
+        shoes: body.shoes,
+        when: body.when,
       };
 
-      bookings.push(bookingResponse);
-
-      return HttpResponse.json(bookingResponse);
+      return HttpResponse.json(booking);
     }
   ),
 ];
