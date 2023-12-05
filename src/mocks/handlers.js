@@ -22,9 +22,6 @@ export const handlers = [
       return HttpResponse.json(bookingResponse);
     }
   ),
-
-  // ...lägg till ytterligare handlers här vid behov...
 ];
 
-// Kom ihåg att exportera dina handlers
 export default handlers;
