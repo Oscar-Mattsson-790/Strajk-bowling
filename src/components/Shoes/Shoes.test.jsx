@@ -1,48 +1,73 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Shoes from "./Shoes";
+import userEvent from "@testing-library/user-event";
+import { expect, vi } from "vitest";
 
-it("should allow user to select shoe size for each player", () => {
-  let mockUpdateSizeCalled = false;
-  const mockUpdateSize = () => {
-    mockUpdateSizeCalled = true;
-  };
-  let mockAddShoeCalled = false;
-  const mockAddShoe = () => {
-    mockAddShoeCalled = true;
-  };
-  const mockRemoveShoe = () => {};
-  const shoes = [{ id: "shoe1", size: "" }];
+describe("Shoes", () => {
+  it("should allow user to add a shoe size field", async () => {
+    const updateSize = vi.fn();
+    const addShoe = vi.fn();
+    const removeShoe = vi.fn();
+    const shoes = [];
 
-  render(
-    <Shoes
-      updateSize={mockUpdateSize}
-      addShoe={mockAddShoe}
-      removeShoe={mockRemoveShoe}
-      shoes={shoes}
-    />
-  );
+    const { rerender } = render(
+      <Shoes
+        updateSize={updateSize}
+        addShoe={addShoe}
+        removeShoe={removeShoe}
+        shoes={shoes}
+      />
+    );
 
-  const addButton = screen.getByText("+");
-  fireEvent.click(addButton);
+    const addButton = screen.getByRole("button", { name: "+" });
+    await userEvent.click(addButton);
 
-  expect(mockAddShoeCalled).toBe(true);
-});
+    shoes.push({ id: vi.fn().mockReturnValue("1"), size: "" });
+    rerender(
+      <Shoes
+        updateSize={updateSize}
+        addShoe={addShoe}
+        removeShoe={removeShoe}
+        shoes={shoes}
+      />
+    );
 
-it("should allow user to remove a shoe size field", () => {
-  let mockRemoveShoeCalled = false;
-  const mockRemoveShoe = (id) => {
-    if (id === "shoe1") {
-      mockRemoveShoeCalled = true;
-    }
-  };
-  const shoes = [
-    { id: "shoe1", size: "" },
-    { id: "shoe2", size: "" },
-  ];
+    const shoeSizeInputs = screen.getAllByRole("textbox");
+    expect(shoeSizeInputs).toHaveLength(shoes.length);
+    expect(addShoe).toHaveBeenCalled();
+  });
 
-  render(<Shoes removeShoe={mockRemoveShoe} shoes={shoes} />);
+  it("should allow user to remove a shoe size field", async () => {
+    const updateSize = vi.fn();
+    const addShoe = vi.fn();
+    const removeShoe = vi.fn();
+    const shoes = [{ id: "1", size: "40" }];
 
-  const removeButtons = screen.getAllByText("-");
-  fireEvent.click(removeButtons[0]);
-  expect(mockRemoveShoeCalled).toBe(true);
+    const { rerender } = render(
+      <Shoes
+        updateSize={updateSize}
+        addShoe={addShoe}
+        removeShoe={removeShoe}
+        shoes={shoes}
+      />
+    );
+
+    const removeButton = screen.getByRole("button", { name: "-" });
+    await userEvent.click(removeButton);
+
+    shoes.pop();
+    rerender(
+      <Shoes
+        updateSize={updateSize}
+        addShoe={addShoe}
+        removeShoe={removeShoe}
+        shoes={shoes}
+      />
+    );
+
+    expect(removeShoe).toHaveBeenCalledWith("1");
+    expect(shoes).toHaveLength(0);
+  });
+
+  // Lägg till fler tester här för att hantera unik skostorlek och bekräftelse av vald storlek
 });
