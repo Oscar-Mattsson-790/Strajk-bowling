@@ -12,7 +12,6 @@ describe("Booking process", () => {
 
     fireEvent.click(screen.getByText(/strIIIIIike!/i));
 
-    // Vänta på att felmeddelandet visas på skärmen
     await waitFor(() => {
       const errorMessage = screen.getByText(
         /Fill out all the fields and make sure that people and shoes is the same number./i
