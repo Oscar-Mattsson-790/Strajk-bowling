@@ -16,17 +16,17 @@ describe("Testing navigation ", () => {
     expect(navigationLinks[1].textContent).toBe("Confirmation");
   });
 
-  // it("navigates to the booking view when the booking navigation link is clicked", () => {
-  //   const navigationLinks = screen.getAllByTestId("navigation-link");
-  //   userEvent.click(navigationLinks[0]);
-  //   expect(screen.queryByText("When, WHAT & Who")).toBeInTheDocument();
-  // });
+  it("navigates to the booking view when the booking navigation link is clicked", () => {
+    const navigationLinks = screen.getAllByTestId("navigation-link");
+    userEvent.click(navigationLinks[0]);
+    expect(screen.queryByText("When, WHAT & Who")).toBeInTheDocument();
+  });
 
-  // it("navigates to the confirmation view when the confirmation navigation link is clicked", async () => {
-  //   const navigationLinks = screen.getAllByTestId("navigation-link");
-  //   userEvent.click(navigationLinks[1]);
-  //   await waitFor(() => {
-  //     expect(screen.queryByText("Inga bokning gjord!")).toBeInTheDocument();
-  //   });
-  // });
+  it("navigates to the confirmation view when the confirmation navigation link is clicked", async () => {
+    const navigationLinks = screen.getAllByTestId("navigation-link");
+    userEvent.click(navigationLinks[1]);
+    await waitFor(() => {
+      expect(screen.queryByText("Inga bokning gjord!")).toBeInTheDocument();
+    });
+  });
 });
