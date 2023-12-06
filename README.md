@@ -33,3 +33,7 @@
 5) Som användare vill jag kunna navigera mellan boknings-och bekräftelsevyn.
 1. Användaren ska ha möjlighet att enkelt navigera tillbaka från bokningsvyn till bekräftelsevyn.
 2. Användaren ska ha möjlighet att enkelt navigera från bekräftelsevyn till bokningsvyn.
+
+------
+
+6) Som användare vill jag få ett felmeddelande när inte allt är ifyllt.
