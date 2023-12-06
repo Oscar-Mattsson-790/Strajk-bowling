@@ -4,9 +4,8 @@
 1) Som användare vill jag kunna boka datum och tid samt ange antal spelare så att jag kan reservera 1 eller flera baner i bowlinghallen.
 1. Användaren ska kunna välja ett datum från en kalender.
 2. Användaren ska kunna välja en tid för bokningen.
-3. Användaren ska kunna ange antalet spelare (minst 1, maxgräns bestäms utifrån hallens kapacitet).
-4. Systemet ska visa tillgängliga banor baserat på valt datum, tid och antal spelare.
-5. Användaren ska kunna bekräfta och gå vidare med bokningen.
+3. Användaren ska kunna ange antalet spelare för bokningen.
+4. Användare ska kunna ange antalet bakor för banor för bokningen.
 
 ------
 
