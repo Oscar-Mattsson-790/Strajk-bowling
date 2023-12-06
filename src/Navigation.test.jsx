@@ -1,29 +1,30 @@
 import { beforeEach, it } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("Testing navigation ", () => {
   beforeEach(() => {
     render(<App />);
-    fireEvent.click(screen.getByTestId("navigation-item"));
+    userEvent.click(screen.getByTestId("navigation-item"));
   });
 
-  it(" Should have 2 navigation links when clicked on the menu bar icon", () => {
+  it("displays both booking and confirmation navigation links when the menu bar icon is clicked", () => {
     const navigationLinks = screen.getAllByTestId("navigation-link");
     expect(navigationLinks.length).toBe(2);
     expect(navigationLinks[0].textContent).toBe("Booking");
     expect(navigationLinks[1].textContent).toBe("Confirmation");
   });
 
-  // it("Should redirect to the booking page if clicked on the booking navigate link", () => {
+  // it("navigates to the booking view when the booking navigation link is clicked", () => {
   //   const navigationLinks = screen.getAllByTestId("navigation-link");
-  //   fireEvent.click(navigationLinks[0]);
+  //   userEvent.click(navigationLinks[0]);
   //   expect(screen.queryByText("When, WHAT & Who")).toBeInTheDocument();
   // });
 
-  // it("Should redirect to the confirmation page if clicked on the confirmation navigate link", async () => {
+  // it("navigates to the confirmation view when the confirmation navigation link is clicked", async () => {
   //   const navigationLinks = screen.getAllByTestId("navigation-link");
-  //   fireEvent.click(navigationLinks[1]);
+  //   userEvent.click(navigationLinks[1]);
   //   await waitFor(() => {
   //     expect(screen.queryByText("Inga bokning gjord!")).toBeInTheDocument();
   //   });

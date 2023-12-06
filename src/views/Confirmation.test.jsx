@@ -32,14 +32,11 @@ describe("Booking Submission and Confirmation Process", () => {
 
     for (let i = 0; i < 4; i++) {
       await userEvent.click(screen.getByText(/\+/i));
-      await userEvent.type(screen.getAllByRole("textbox")[i], "42"); // Ange
+      await userEvent.type(screen.getAllByRole("textbox")[i], "42");
     }
 
     await userEvent.click(screen.getByText(/strIIIIIike!/i));
-
-    // Bekräftelselogik här
     // await waitFor(() => {
-    //   // Kontrollera att bekräftelseskärmen visas med korrekta värden
     //   expect(
     //     screen.getByText(/Booking number: STR9883PCKL/i)
     //   ).toBeInTheDocument();
