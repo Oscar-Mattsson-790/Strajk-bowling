@@ -8,8 +8,6 @@ export const handlers = [
 
       const totalPrice = body.people * 120 + body.lanes * 100;
 
-      const shoeSizesAreValid = body.shoes.length === parseInt(body.people);
-
       const booking = {
         active: true,
         id: "STR9883PCKL",
