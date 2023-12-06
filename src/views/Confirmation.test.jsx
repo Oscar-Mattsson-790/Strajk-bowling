@@ -1,46 +1,45 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router-dom";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { RouterProvider } from "react-router-dom";
 import Booking from "./Booking";
-import { expect, vi } from "vitest";
-
-global.fetch = vi.fn(() =>
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        id: "STR9883PCKL",
-        price: 880,
-      }),
-  })
-);
+import { describe, it, vi, expect } from "vitest";
+import router from "../router";
 
 describe("Booking Submission and Confirmation Process", () => {
   it("allows the user to review and confirm all booking details before submission", async () => {
     render(
-      <MemoryRouter>
+      <RouterProvider router={router}>
         <Booking />
-      </MemoryRouter>
+      </RouterProvider>
     );
+    const fetchSpy = vi.spyOn(window, "fetch");
 
-    await userEvent.type(screen.getByLabelText(/date/i), "2023-12-05");
-    await userEvent.type(screen.getByLabelText(/time/i), "15:00");
-    await userEvent.type(
-      screen.getByLabelText(/number of awesome bowlers/i),
-      "4"
-    );
-    await userEvent.type(screen.getByLabelText(/number of lanes/i), "2");
+    fireEvent.change(screen.getByLabelText(/date/i), {
+      target: { value: "2023-11-27" },
+    });
+    fireEvent.change(screen.getByLabelText(/time/i), {
+      target: { value: "212321" },
+    });
+    fireEvent.change(screen.getByLabelText(/number of awesome bowlers/i), {
+      target: { value: 4 },
+    });
+    fireEvent.change(screen.getByLabelText(/number of lanes/i), {
+      target: { value: 1 },
+    });
 
-    for (let i = 0; i < 4; i++) {
-      await userEvent.click(screen.getByText(/\+/i));
-      await userEvent.type(screen.getAllByRole("textbox")[i], "42");
+    for (let index = 0; index < 4; index++) {
+      fireEvent.click(screen.getByText("+"));
+      const shoesFields = screen.queryAllByTestId("shoesid");
+      fireEvent.change(shoesFields[index].querySelector('input[type="text"]'), {
+        target: { value: 40 },
+      });
     }
 
-    await userEvent.click(screen.getByText(/strIIIIIike!/i));
-    // await waitFor(() => {
-    //   expect(
-    //     screen.getByText(/Booking number: STR9883PCKL/i)
-    //   ).toBeInTheDocument();
-    //   expect(screen.getByText(/Total: 880 sek/i)).toBeInTheDocument();
-    // });
+    fireEvent.click(screen.getByText(/strIIIIIike!/i));
+
+    expect(fetchSpy).toHaveBeenCalled();
+
+    await waitFor(() => {
+      expect(screen.queryByText("See you soon!")).toBeInTheDocument();
+    });
   });
 });
