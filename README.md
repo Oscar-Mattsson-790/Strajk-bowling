@@ -37,3 +37,4 @@
 ------
 
 6) Som användare vill jag få ett felmeddelande när inte allt är ifyllt.
+1. När användaren skickar bokningen utan att ha fyllt i alla nödvändiga fält, ska ett felmeddelande.
