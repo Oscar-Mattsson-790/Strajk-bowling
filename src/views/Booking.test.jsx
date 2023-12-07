@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Booking from "./Booking";
-import { expect, vi } from "vitest";
+import { expect } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 describe("Booking process", () => {
