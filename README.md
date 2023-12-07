@@ -12,7 +12,6 @@
 2) Som användare vill jag kunna välja skostorlek för varje spelare så varje spelare får skor som passar.
 1. För varje angiven spelare, ska det finnas ett alternativ att välja skostorlek.
 2. Varje spelare ska kunna ha en unik skostorlek.
-3. Systemet ska bekräfta valet av skostorlek för varje spelare.
 
 ------
 
